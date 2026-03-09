@@ -14,7 +14,8 @@ public class Falsissimo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        StartForm formIniziale = new StartForm();
+        formIniziale.setVisible(true);
     }
     
 }
