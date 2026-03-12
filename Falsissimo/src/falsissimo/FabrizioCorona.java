@@ -19,6 +19,7 @@ public abstract class FabrizioCorona {
         this.soldi = soldi;
         this.fama = fama;
         this.astuzia = astuzia;
+        this.abilità = abilità;
     }
     
     public void setNome(String nome) {

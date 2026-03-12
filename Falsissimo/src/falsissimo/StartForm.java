@@ -39,6 +39,11 @@ public class StartForm extends javax.swing.JFrame {
 
         btnStart.setFont(new java.awt.Font("Serif", 3, 24)); // NOI18N
         btnStart.setText("START");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         txtNome.setFont(new java.awt.Font("Serif", 2, 18)); // NOI18N
         txtNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -58,11 +63,11 @@ public class StartForm extends javax.swing.JFrame {
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(155, 155, 155))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(254, 254, 254))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(274, 274, 274))))
+                        .addGap(274, 274, 274))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(246, 246, 246))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,6 +94,11 @@ public class StartForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+    }//GEN-LAST:event_btnStartActionPerformed
 
     /**
      * @param args the command line arguments
