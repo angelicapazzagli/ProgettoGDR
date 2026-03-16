@@ -15,7 +15,8 @@ public abstract class FabrizioCorona {
     protected int astuzia;
     protected Abilità abilità;
     
-    public FabrizioCorona(int soldi, int fama, int astuzia, Abilità abilità) {
+    public FabrizioCorona(String nome, int soldi, int fama, int astuzia, Abilità abilità) {
+        this.nome = nome;
         this.soldi = soldi;
         this.fama = fama;
         this.astuzia = astuzia;
