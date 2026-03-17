@@ -17,5 +17,4 @@ public class Falsissimo {
         StartForm formIniziale = new StartForm();
         formIniziale.setVisible(true);
     }
-    
 }

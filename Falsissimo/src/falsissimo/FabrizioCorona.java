@@ -35,5 +35,15 @@ public abstract class FabrizioCorona {
         this.abilità = abilità;
     }
     
+    public int checkValore(int valore) {
+        if(valore > 10) {
+            valore = 10;
+        }
+        else if(valore < 0) {
+            valore = 0;
+        }
+        return valore;
+    }
+    
     public abstract void usaAbilità();
 }

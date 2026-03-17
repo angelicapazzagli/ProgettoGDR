@@ -5,6 +5,7 @@
 package falsissimo;
 
 import java.io.IOException;
+import java.util.Random;
 
 /**
  *
@@ -14,16 +15,26 @@ public class GameManager {
     private String fileCSV;
     private String fileBinary;
     private FabrizioCorona giocatore;
+    private String nickname;
+    private Random random;
     
-    public GameManager(String csv, String binary, int nPersonaggio) {
+    public GameManager(String csv, String binary) {
         this.fileCSV = csv;
         this.fileBinary = binary;
-        switch (nPersonaggio) {
+        random = new Random();
+    }
+    
+    public void setNickname(String name) {
+        this.nickname = name;
+    }
+    
+    public void sceltaPersonaggio(int nScelta) {
+        switch (nScelta) {
             case 1:
                 this.giocatore = new Paparazzo("Buona");
                 break;
             case 2:
-                //this.giocatore = new Carcerato();
+                this.giocatore = new Carcerato(random.nextInt(45000), true);
                 break;
             default:
                 this.giocatore = new Modello("Corona's");
