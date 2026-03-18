@@ -42,6 +42,10 @@ public class GameManager {
         }
     }
     
+    public void esplora() {
+        EventiCasuali.estraiEvento(giocatore);
+    }
+    
     public void readCSV() throws IOException {
         FileManager.readCSV(fileCSV);
     }

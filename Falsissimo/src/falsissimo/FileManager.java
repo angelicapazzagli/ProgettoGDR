@@ -26,7 +26,15 @@ public class FileManager {
                 int soldi = Integer.parseInt(personaggio[1]);
                 int fama = Integer.parseInt(personaggio[2]);
                 int astuzia = Integer.parseInt(personaggio[3]);
-                //fc = new FabrizioCorona(personaggio[0], soldi, fama, astuzia, abilità);
+                if(personaggio[4].equals("IMBUCATI")) {
+                    //fc = new Modello("Corona's");
+                }
+                else if(personaggio[4].equals("EVITA")) {
+                    //fc = new Carcerato(random.nextInt(45000), true);
+                }
+                else {
+                    //fc = new Paparazzo(String strategia);
+                }
                 //personaggi.add(fc);
             }
         }

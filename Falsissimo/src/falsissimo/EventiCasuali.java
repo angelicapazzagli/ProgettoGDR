@@ -23,5 +23,32 @@ public class EventiCasuali {
         else {
             fabrizio.astuzia++;
         }
+        fabrizio.checkValore(fabrizio.astuzia);
+    }
+    
+    public static void ricatto(FabrizioCorona fabrizio) {
+        Random random = new Random();
+        int perc = random.nextInt(10);
+        if(fabrizio.astuzia > 8) {
+            if(perc > 8) {
+                fabrizio.soldi += fabrizio.soldi / 2;
+            }
+            else {
+                fabrizio.soldi += fabrizio.soldi / 6;
+            }
+        }
+    }
+    
+    public static void estraiEvento(FabrizioCorona fabrizio) {
+        Random random = new Random();
+        int ev = random.nextInt(3);
+        switch(ev) {
+            case 0:
+                perquisizione(fabrizio);
+            case 1:
+                sabotaggio(fabrizio);
+            case 2:
+                ricatto(fabrizio);
+        }
     }
 }

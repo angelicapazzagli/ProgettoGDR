@@ -23,18 +23,6 @@ public abstract class FabrizioCorona {
         this.abilità = abilità;
     }
     
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
-    public String getNome() {
-        return nome;
-    }
-    
-    public void setAbilità(Abilità abilità) {
-        this.abilità = abilità;
-    }
-    
     public int checkValore(int valore) {
         if(valore > 10) {
             valore = 10;
