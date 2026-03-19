@@ -4,6 +4,8 @@
  */
 package falsissimo;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author pazzagli.angelica
@@ -32,11 +34,16 @@ public class StartForm extends javax.swing.JFrame {
         btnStart = new javax.swing.JButton();
         txtNome = new javax.swing.JTextField();
         lblTitolo = new javax.swing.JLabel();
+        btnRegole = new javax.swing.JButton();
+        btnClassifica = new javax.swing.JButton();
+        btnRecupera = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
+        btnStart.setBackground(new java.awt.Color(204, 204, 204));
         btnStart.setFont(new java.awt.Font("Serif", 3, 24)); // NOI18N
         btnStart.setText("START");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
@@ -47,38 +54,76 @@ public class StartForm extends javax.swing.JFrame {
 
         txtNome.setFont(new java.awt.Font("Serif", 2, 18)); // NOI18N
         txtNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNome.setText("insert name");
+        txtNome.setText("inserisci nickname");
 
         lblTitolo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IconaFalsissimo.png"))); // NOI18N
         lblTitolo.setText("jLabel1");
+
+        btnRegole.setBackground(new java.awt.Color(204, 204, 204));
+        btnRegole.setFont(new java.awt.Font("Serif", 3, 12)); // NOI18N
+        btnRegole.setText("REGOLE");
+        btnRegole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegoleActionPerformed(evt);
+            }
+        });
+
+        btnClassifica.setBackground(new java.awt.Color(204, 204, 204));
+        btnClassifica.setFont(new java.awt.Font("Serif", 3, 14)); // NOI18N
+        btnClassifica.setText("MOSTRA CLASSIFICA");
+
+        btnRecupera.setBackground(new java.awt.Color(204, 204, 204));
+        btnRecupera.setFont(new java.awt.Font("Serif", 3, 14)); // NOI18N
+        btnRecupera.setText("RECUPERA PARTITA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(189, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(155, 155, 155))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(274, 274, 274))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(246, 246, 246))))
+                .addGap(203, 203, 203)
+                .addComponent(btnClassifica)
+                .addGap(34, 34, 34)
+                .addComponent(btnRecupera)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(119, 119, 119))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95)))
+                        .addGap(36, 36, 36)
+                        .addComponent(btnRegole)))
+                .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(btnRegole)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClassifica, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRecupera, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -99,6 +144,17 @@ public class StartForm extends javax.swing.JFrame {
         MenuForm menuForm = new MenuForm();
         menuForm.setVisible(true);
     }//GEN-LAST:event_btnStartActionPerformed
+
+    private void btnRegoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegoleActionPerformed
+        String testo = "Benvenuto a Falsissimo!\n\n"
+                 + "Inserisci il tuo nickname e premi START per iniziare una nuova partita.\n"
+                 + "Oppure clicca 'Recupera partita' per riprendere la precedente.\n"
+                 + "Clicca su 'Classifica' per visualizzare l'elenco dei user che hanno giocato.\n"
+                 + "L'obiettivo è raggiungere il maggior patrimonio possibile in 10 turni, ma attenzione a non scendere sotto zero.\n\n"
+                 + "Ad una giornata da Fabrizio Corona!\n\n";
+    
+        JOptionPane.showMessageDialog(this, testo, "Regole del Gioco", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnRegoleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,8 +182,12 @@ public class StartForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClassifica;
+    private javax.swing.JButton btnRecupera;
+    private javax.swing.JButton btnRegole;
     private javax.swing.JButton btnStart;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblTitolo;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
