@@ -8,16 +8,10 @@ package falsissimo;
  *
  * @author pazzagli.angelica
  */
-public class Paparazzo  extends FabrizioCorona{
-    private boolean esclusiva;
-    private int scoop;
-    private String strategia;
+public class Paparazzo extends FabrizioCorona{
     
-    public Paparazzo(String strategia) {
-        super("PAPARAZZO-CORONA", 500000, 6, 9, Abilità.SCOPRI);
-        this.esclusiva = true;
-        this.scoop = 0;
-        this.strategia = strategia;
+    public Paparazzo() {
+        super("PAPARAZZO-CORONA", 300000, 6, 9, Abilità.SCOPRI);
     }
     
     @Override

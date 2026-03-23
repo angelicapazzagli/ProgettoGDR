@@ -14,7 +14,8 @@ public class Falsissimo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        StartForm formIniziale = new StartForm();
+        GameManager gm = new GameManager();
+        StartForm formIniziale = new StartForm(gm);
         formIniziale.setVisible(true);
     }
 }

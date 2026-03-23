@@ -9,13 +9,9 @@ package falsissimo;
  * @author pazzagli.angelica
  */
 public class Carcerato extends FabrizioCorona{
-    private int debiti;
-    private boolean carcere;
     
-    public Carcerato(int debiti, boolean carcere) {
+    public Carcerato() {
         super("CARCERATO-CORONA", 100000, 9, 5, Abilità.EVITA);
-        this.debiti = debiti;
-        this.carcere = carcere;
     }
     
     @Override

@@ -23,6 +23,18 @@ public abstract class FabrizioCorona {
         this.abilità = abilità;
     }
     
+    public int getSoldi() {
+        return soldi;
+    }
+    
+    public int getFama() {
+        return fama;
+    }
+    
+    public int getAstuzia() {
+        return astuzia;
+    }
+    
     public int checkValore(int valore) {
         if(valore > 10) {
             valore = 10;

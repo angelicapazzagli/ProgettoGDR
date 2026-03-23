@@ -13,12 +13,15 @@ import javax.swing.JOptionPane;
 public class StartForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StartForm.class.getName());
-
+    private GameManager gameManager;
     /**
      * Creates new form StartForm
+     * @param gm
      */
-    public StartForm() {
+    public StartForm(GameManager gm) {
         initComponents();
+        btnStart.setEnabled(false);
+        this.gameManager = gm;
     }
 
     /**
@@ -55,6 +58,11 @@ public class StartForm extends javax.swing.JFrame {
         txtNome.setFont(new java.awt.Font("Serif", 2, 18)); // NOI18N
         txtNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNome.setText("inserisci nickname");
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
 
         lblTitolo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IconaFalsissimo.png"))); // NOI18N
         lblTitolo.setText("jLabel1");
@@ -141,7 +149,9 @@ public class StartForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        MenuForm menuForm = new MenuForm();
+        String name = txtNome.getText();
+        gameManager.setNickname(name);
+        MenuForm menuForm = new MenuForm(gameManager);
         menuForm.setVisible(true);
     }//GEN-LAST:event_btnStartActionPerformed
 
@@ -156,30 +166,12 @@ public class StartForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, testo, "Regole del Gioco", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnRegoleActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        if(txtNome.getText() != "inserisci nickname") {
+            btnStart.setEnabled(true);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_txtNomeActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new StartForm().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClassifica;

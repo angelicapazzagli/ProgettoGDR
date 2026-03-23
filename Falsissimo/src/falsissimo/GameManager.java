@@ -18,9 +18,9 @@ public class GameManager {
     private String nickname;
     private Random random;
     
-    public GameManager(String csv, String binary) {
-        this.fileCSV = csv;
-        this.fileBinary = binary;
+    public GameManager() {
+        //this.fileCSV = csv;
+        //this.fileBinary = binary;
         random = new Random();
     }
     
@@ -31,15 +31,25 @@ public class GameManager {
     public void sceltaPersonaggio(int nScelta) {
         switch (nScelta) {
             case 1:
-                this.giocatore = new Paparazzo("Buona");
+                this.giocatore = new Paparazzo();
                 break;
             case 2:
-                this.giocatore = new Carcerato(random.nextInt(45000), true);
+                this.giocatore = new Carcerato();
                 break;
-            default:
-                this.giocatore = new Modello("Corona's");
+            case 3:
+                this.giocatore = new Modello();
                 break;
         }
+    }
+    
+    public int getPersonaggio() {
+        if("PAPARAZZO-CORONA".equals(giocatore.nome)) {
+            return 1;
+        }
+        else if("CARCERATO-CORONA".equals(giocatore.nome)) {
+            return 2;
+        }
+        return 3;
     }
     
     public void esplora() {
