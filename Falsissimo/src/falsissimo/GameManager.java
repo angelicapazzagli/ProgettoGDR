@@ -14,7 +14,7 @@ import java.util.Random;
 public class GameManager {
     private String fileCSV;
     private String fileBinary;
-    private FabrizioCorona giocatore;
+    protected FabrizioCorona giocatore;
     private String nickname;
     private Random random;
     
@@ -26,6 +26,10 @@ public class GameManager {
     
     public void setNickname(String name) {
         this.nickname = name;
+    }
+    
+    public String getNickname() {
+        return nickname;
     }
     
     public void sceltaPersonaggio(int nScelta) {
