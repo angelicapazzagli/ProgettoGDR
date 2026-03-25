@@ -4,6 +4,7 @@
  */
 package falsissimo;
 
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -79,6 +80,11 @@ public class StartForm extends javax.swing.JFrame {
         btnClassifica.setBackground(new java.awt.Color(204, 204, 204));
         btnClassifica.setFont(new java.awt.Font("Serif", 3, 14)); // NOI18N
         btnClassifica.setText("MOSTRA CLASSIFICA");
+        btnClassifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClassificaActionPerformed(evt);
+            }
+        });
 
         btnRecupera.setBackground(new java.awt.Color(204, 204, 204));
         btnRecupera.setFont(new java.awt.Font("Serif", 3, 14)); // NOI18N
@@ -167,10 +173,18 @@ public class StartForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegoleActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        if(txtNome.getText() != "inserisci nickname") {
+        if(!"inserisci nickname".equals(txtNome.getText())) {
             btnStart.setEnabled(true);
         }
     }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void btnClassificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClassificaActionPerformed
+        try {
+            gameManager.readClassifica();
+        } catch (IOException ex) {
+            System.getLogger(StartForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_btnClassificaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

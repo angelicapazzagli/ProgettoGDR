@@ -12,15 +12,13 @@ import java.util.Random;
  * @author pazzagli.angelica
  */
 public class GameManager {
-    private String fileCSV;
-    private String fileBinary;
+    private String fileClassifica;
     protected FabrizioCorona giocatore;
     private String nickname;
     private Random random;
     
-    public GameManager() {
-        //this.fileCSV = csv;
-        //this.fileBinary = binary;
+    public GameManager(String txt) {
+        this.fileClassifica = txt;
         random = new Random();
     }
     
@@ -60,11 +58,11 @@ public class GameManager {
         EventiCasuali.estraiEvento(giocatore);
     }
     
-    public void readCSV() throws IOException {
-        FileManager.readCSV(fileCSV);
+    public void readClassifica() throws IOException {
+        FileManager.readClassifica(fileClassifica);
     }
     
-    public void writeCSV() throws IOException {
-        FileManager.writeCSV(fileCSV, giocatore);
+    public void writeClassifica() throws IOException {
+        FileManager.writeClassifica(fileClassifica, giocatore, this);
     }
 }

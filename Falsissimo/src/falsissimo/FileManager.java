@@ -16,34 +16,23 @@ import java.util.ArrayList;
  * @author pazzagli.angelica
  */
 public class FileManager {
-    public static ArrayList<FabrizioCorona> readCSV(String csv) throws IOException {
-        ArrayList<FabrizioCorona> personaggi = new ArrayList();
-        try(BufferedReader reader = new BufferedReader(new FileReader(csv))) {
+    public static ArrayList<String> readClassifica(String txt) throws IOException {
+        ArrayList<String> giocatori = new ArrayList();
+        try(BufferedReader reader = new BufferedReader(new FileReader(txt))) {
             String line;
             while((line = reader.readLine()) != null) {
-                FabrizioCorona fc;
-                String[] personaggio = line.split(",");
-                int soldi = Integer.parseInt(personaggio[1]);
-                int fama = Integer.parseInt(personaggio[2]);
-                int astuzia = Integer.parseInt(personaggio[3]);
-                if(personaggio[4].equals("IMBUCATI")) {
-                    //fc = new Modello("Corona's");
-                }
-                else if(personaggio[4].equals("EVITA")) {
-                    //fc = new Carcerato(random.nextInt(45000), true);
-                }
-                else {
-                    //fc = new Paparazzo(String strategia);
-                }
-                //personaggi.add(fc);
+                String utente;
+                String[] personaggio = line.split(" ");
+                utente = personaggio[0] + personaggio[1];
+                giocatori.add(utente);
             }
         }
-        return personaggi;
+        return giocatori;
     }
     
-    public static void writeCSV(String csv, FabrizioCorona fc) throws IOException {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(csv))) {
-            //String dati;
+    public static void writeClassifica(String txt, FabrizioCorona fc, GameManager gm) throws IOException {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(txt))) {
+            writer.write(gm.getNickname() + fc.nome);
         }
     }
 }

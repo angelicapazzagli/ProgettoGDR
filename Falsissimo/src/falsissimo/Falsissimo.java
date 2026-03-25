@@ -14,7 +14,8 @@ public class Falsissimo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        GameManager gm = new GameManager();
+        String fileClassifica = "Classifica.txt";
+        GameManager gm = new GameManager(fileClassifica);
         StartForm formIniziale = new StartForm(gm);
         formIniziale.setVisible(true);
     }
