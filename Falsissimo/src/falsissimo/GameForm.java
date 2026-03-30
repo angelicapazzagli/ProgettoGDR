@@ -4,6 +4,7 @@
  */
 package falsissimo;
 
+import java.io.IOException;
 import javax.swing.ImageIcon;
 
 /**
@@ -217,7 +218,11 @@ public class GameForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaActionPerformed
-        
+        try {
+            gameManager.writeClassifica();
+        } catch (IOException ex) {
+            System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_btnSalvaActionPerformed
 
 

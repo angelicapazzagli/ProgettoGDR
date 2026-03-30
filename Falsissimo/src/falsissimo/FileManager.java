@@ -16,15 +16,12 @@ import java.util.ArrayList;
  * @author pazzagli.angelica
  */
 public class FileManager {
-    public static ArrayList<String> readClassifica(String txt) throws IOException {
-        ArrayList<String> giocatori = new ArrayList();
+    public static String readClassifica(String txt) throws IOException {
+        String giocatori = "";
         try(BufferedReader reader = new BufferedReader(new FileReader(txt))) {
             String line;
             while((line = reader.readLine()) != null) {
-                String utente;
-                String[] personaggio = line.split(" ");
-                utente = personaggio[0] + personaggio[1];
-                giocatori.add(utente);
+                giocatori += line + "\n";
             }
         }
         return giocatori;
@@ -32,7 +29,7 @@ public class FileManager {
     
     public static void writeClassifica(String txt, FabrizioCorona fc, GameManager gm) throws IOException {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(txt))) {
-            writer.write(gm.getNickname() + fc.nome);
+            writer.write(gm.getNickname() + " " + fc.nome);
         }
     }
 }

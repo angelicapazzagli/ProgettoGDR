@@ -11,11 +11,12 @@ package falsissimo;
 public class Paparazzo extends FabrizioCorona{
     
     public Paparazzo() {
-        super("PAPARAZZO-CORONA", 300000, 6, 9, Abilità.SCOPRI);
+        super("PAPARAZZO", 300000, 6, 9, Abilità.SCOPRI);
     }
     
     @Override
     public void usaAbilità() {
-        
+        System.out.println("Hai scoperto i segreti più temibili dei grandi dello spettacolo. Soldi +10.000");
+        this.soldi += 10000;
     }
 }

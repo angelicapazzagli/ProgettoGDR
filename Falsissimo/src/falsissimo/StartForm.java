@@ -180,7 +180,8 @@ public class StartForm extends javax.swing.JFrame {
 
     private void btnClassificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClassificaActionPerformed
         try {
-            gameManager.readClassifica();
+            String classifica = gameManager.readClassifica();
+            JOptionPane.showMessageDialog(this, classifica, "CLASSIFICA", JOptionPane.WARNING_MESSAGE);
         } catch (IOException ex) {
             System.getLogger(StartForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }

@@ -58,8 +58,8 @@ public class GameManager {
         EventiCasuali.estraiEvento(giocatore);
     }
     
-    public void readClassifica() throws IOException {
-        FileManager.readClassifica(fileClassifica);
+    public String readClassifica() throws IOException {
+        return FileManager.readClassifica(fileClassifica);
     }
     
     public void writeClassifica() throws IOException {
