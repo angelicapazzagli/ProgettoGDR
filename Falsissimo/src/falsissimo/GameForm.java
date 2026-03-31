@@ -223,6 +223,7 @@ public class GameForm extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+        gameManager.newCartella();
     }//GEN-LAST:event_btnSalvaActionPerformed
 
 

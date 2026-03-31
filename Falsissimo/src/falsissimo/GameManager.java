@@ -45,10 +45,10 @@ public class GameManager {
     }
     
     public int getPersonaggio() {
-        if("PAPARAZZO-CORONA".equals(giocatore.nome)) {
+        if("PAPARAZZO".equals(giocatore.nome)) {
             return 1;
         }
-        else if("CARCERATO-CORONA".equals(giocatore.nome)) {
+        else if("CARCERATO".equals(giocatore.nome)) {
             return 2;
         }
         return 3;
@@ -64,5 +64,9 @@ public class GameManager {
     
     public void writeClassifica() throws IOException {
         FileManager.writeClassifica(fileClassifica, giocatore, this);
+    }
+    
+    public void newCartella() {
+        FileManager.newCartella(nickname);
     }
 }
