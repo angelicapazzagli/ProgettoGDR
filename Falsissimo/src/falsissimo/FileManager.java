@@ -7,10 +7,14 @@ package falsissimo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  *
@@ -40,13 +44,39 @@ public class FileManager {
         if(!cartella.exists()) {
             if(cartella.mkdirs()) {
                 System.out.println("Cartella creata con successo!");
-            } 
-            else {
-                System.out.println("Impossibile creare la cartella.");
             }
         } 
         else {
             System.out.println("La cartella esiste già.");
+        }
+    }
+    
+    public static int checkFiles(File cartella) {
+        File[] files = cartella.listFiles();
+        int fileCount = 0;
+        if(files != null) {
+            for(File file : files) {
+                if(file.isFile()) {
+                    fileCount++;
+                }
+            }
+        }
+        return fileCount;
+    }
+    
+    public static void serializzaPartita(File cartella, FabrizioCorona corona) throws FileNotFoundException, IOException {
+        String filePath = "game.ser";
+        if(FileManager.checkFiles(cartella) < 3) {
+            try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+                oos.writeObject(corona);
+            }
+        }
+    }
+    
+    public static FabrizioCorona deserializzaPartita(String file) throws IOException, ClassNotFoundException {
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            FabrizioCorona corona = (FabrizioCorona)ois.readObject();
+            return corona;
         }
     }
 }
