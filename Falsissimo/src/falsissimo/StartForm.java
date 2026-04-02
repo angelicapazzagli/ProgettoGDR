@@ -157,8 +157,16 @@ public class StartForm extends javax.swing.JFrame {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         String name = txtNome.getText();
         gameManager.setNickname(name);
-        MenuForm menuForm = new MenuForm(gameManager);
-        menuForm.setVisible(true);
+        if (gameManager.presenzaSalvataggi()) {
+            SavesForm saveForm = new SavesForm(gameManager);
+            saveForm.setVisible(true);
+            this.dispose();
+        } 
+        else {
+            MenuForm menu = new MenuForm(gameManager);
+            menu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnRegoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegoleActionPerformed

@@ -219,11 +219,10 @@ public class GameForm extends javax.swing.JFrame {
 
     private void btnSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaActionPerformed
         try {
-            gameManager.writeClassifica();
+            gameManager.salvaPartita();
         } catch (IOException ex) {
             System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        gameManager.newCartella();
     }//GEN-LAST:event_btnSalvaActionPerformed
 
 

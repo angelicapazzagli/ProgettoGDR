@@ -4,7 +4,10 @@
  */
 package falsissimo;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -12,24 +15,25 @@ import java.util.Random;
  * @author pazzagli.angelica
  */
 public class GameManager {
+
     private String fileClassifica;
     protected FabrizioCorona giocatore;
     private String nickname;
     private Random random;
-    
+
     public GameManager(String txt) {
         this.fileClassifica = txt;
         random = new Random();
     }
-    
+
     public void setNickname(String name) {
         this.nickname = name;
     }
-    
+
     public String getNickname() {
         return nickname;
     }
-    
+
     public void sceltaPersonaggio(int nScelta) {
         switch (nScelta) {
             case 1:
@@ -44,29 +48,56 @@ public class GameManager {
         }
     }
     
+    public void setpersonaggio(FabrizioCorona corona) {
+        this.giocatore = corona;
+    }
+
     public int getPersonaggio() {
-        if("PAPARAZZO".equals(giocatore.nome)) {
+        if ("PAPARAZZO".equals(giocatore.nome)) {
             return 1;
-        }
-        else if("CARCERATO".equals(giocatore.nome)) {
+        } else if ("CARCERATO".equals(giocatore.nome)) {
             return 2;
         }
         return 3;
     }
-    
+
     public void esplora() {
         EventiCasuali.estraiEvento(giocatore);
     }
-    
+
     public String readClassifica() throws IOException {
         return FileManager.readClassifica(fileClassifica);
     }
-    
+
     public void writeClassifica() throws IOException {
         FileManager.writeClassifica(fileClassifica, giocatore, this);
     }
+
+    public void salvaPartita() throws IOException {
+        File cartella = FileManager.newCartella(nickname);
+        FileManager.serializzaPartita(cartella, giocatore);
+    }
+
+    public boolean presenzaSalvataggi() {
+        File cartella = new File("Salvataggi/" + nickname);
+        return cartella.exists() && cartella.isDirectory();
+    }
+
+    public ArrayList<File> getSalvataggi() {
+        File cartella = new File("Salvataggi/" + nickname);
+        ArrayList<File> files = new ArrayList();
+        if (cartella.exists() && cartella.isDirectory()) {
+            for (File f : cartella.listFiles()) {
+                if (f.isFile()) {
+                    files.add(f);
+                }
+            }
+            files.sort(Comparator.comparingLong(File::lastModified));
+        }
+        return files;
+    }
     
-    public void newCartella() {
-        FileManager.newCartella(nickname);
+    public void caricaPartita(File file) throws IOException, ClassNotFoundException {
+        this.giocatore = FileManager.deserializzaPartita(file.getPath());
     }
 }

@@ -238,6 +238,7 @@ public class MenuForm extends javax.swing.JFrame {
         gameManager.sceltaPersonaggio(personaggioScelto);
         GameForm gameForm = new GameForm(gameManager);
         gameForm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnProseguiActionPerformed
 
     private void btnModelloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelloActionPerformed

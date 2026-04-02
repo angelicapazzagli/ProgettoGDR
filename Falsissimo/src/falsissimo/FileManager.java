@@ -21,62 +21,55 @@ import java.io.ObjectOutputStream;
  * @author pazzagli.angelica
  */
 public class FileManager {
+
     public static String readClassifica(String txt) throws IOException {
         String giocatori = "";
-        try(BufferedReader reader = new BufferedReader(new FileReader(txt))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(txt))) {
             String line;
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 giocatori += line + "\n";
             }
         }
         return giocatori;
     }
-    
+
     public static void writeClassifica(String txt, FabrizioCorona fc, GameManager gm) throws IOException {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(txt))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(txt))) {
             writer.write(gm.getNickname() + " " + fc.nome);
+            writer.newLine();
         }
     }
-    
-    public static void newCartella(String nickname) {
+
+    public static File newCartella(String nickname) {
         String percorso = "Salvataggi/" + nickname;
         File cartella = new File(percorso);
-        if(!cartella.exists()) {
-            if(cartella.mkdirs()) {
-                System.out.println("Cartella creata con successo!");
-            }
-        } 
-        else {
-            System.out.println("La cartella esiste già.");
+        if (!cartella.exists()) {
+            cartella.mkdirs();
         }
+        return cartella;
     }
-    
-    public static int checkFiles(File cartella) {
-        File[] files = cartella.listFiles();
-        int fileCount = 0;
-        if(files != null) {
-            for(File file : files) {
-                if(file.isFile()) {
-                    fileCount++;
+
+    public static void serializzaPartita(File cartella, FabrizioCorona corona) throws FileNotFoundException, IOException {
+        File[] files = cartella.listFiles(File::isFile);
+        if (files != null && files.length >= 3) {
+            File oldest = files[0];
+            for (File f : files) {
+                if (f.lastModified() < oldest.lastModified()) {
+                    oldest = f;
                 }
             }
+            oldest.delete();
         }
-        return fileCount;
-    }
-    
-    public static void serializzaPartita(File cartella, FabrizioCorona corona) throws FileNotFoundException, IOException {
-        String filePath = "game.ser";
-        if(FileManager.checkFiles(cartella) < 3) {
-            try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
-                oos.writeObject(corona);
-            }
+        String fileName = "save_" + corona.nome + ".ser";
+        File file = new File(cartella, fileName);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(corona);
         }
     }
-    
+
     public static FabrizioCorona deserializzaPartita(String file) throws IOException, ClassNotFoundException {
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            FabrizioCorona corona = (FabrizioCorona)ois.readObject();
-            return corona;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (FabrizioCorona) ois.readObject();
         }
     }
 }
