@@ -62,20 +62,26 @@ public class EventiCasuali {
         }
     }
     
-    public static void estraiEvento(FabrizioCorona fabrizio) {
+    public static String estraiEvento(FabrizioCorona fabrizio) {
         Random random = new Random();
-        int ev = random.nextInt(3);
+        int ev = random.nextInt(5);
         switch(ev) {
             case 0:
                 perquisizione(fabrizio);
+                return "Sei stato perquisito.";
             case 1:
                 sabotaggio(fabrizio);
+                return "Sei stato sabotato.";
             case 2:
                 ricatto(fabrizio);
+                return "Sei stato ricattato.";
             case 3:
                 intervistaBelve(fabrizio);
+                return "Francesca Fagnani ti sta intervistando.";
             case 4:
                 incontroBelen(fabrizio);
+                return "Incontri Belen Rodriguez.";
         }
+        return "Nessun evento";
     }
 }

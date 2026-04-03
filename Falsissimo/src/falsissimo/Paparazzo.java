@@ -15,8 +15,8 @@ public class Paparazzo extends FabrizioCorona{
     }
     
     @Override
-    public void usaAbilità() {
-        System.out.println("Hai scoperto i segreti più temibili dei grandi dello spettacolo. Soldi +10.000");
+    public String usaAbilità() {
         this.soldi += 10000;
+        return "Hai scoperto i segreti più temibili dei grandi dello spettacolo. Soldi +10.000";
     }
 }

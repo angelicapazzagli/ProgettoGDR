@@ -60,9 +60,13 @@ public class GameManager {
         }
         return 3;
     }
+    
+    public String usaAbilità() {
+        return giocatore.usaAbilità();
+    }
 
-    public void esplora() {
-        EventiCasuali.estraiEvento(giocatore);
+    public String esplora() {
+        return EventiCasuali.estraiEvento(giocatore);
     }
 
     public String readClassifica() throws IOException {

@@ -16,8 +16,8 @@ public class Modello extends FabrizioCorona{
     }
     
     @Override
-    public void usaAbilità() {
-        System.out.println("Sei riuscito ad imbucarti e ottenere nuovi contratti. Fama +1");
+    public String usaAbilità() {
         this.fama++;
+        return "Sei riuscito ad imbucarti e ottenere nuovi contratti. Fama +1";
     }
 }

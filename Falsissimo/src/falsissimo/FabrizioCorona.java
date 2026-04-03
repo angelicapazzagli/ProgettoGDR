@@ -48,5 +48,5 @@ public abstract class FabrizioCorona implements Serializable{
         return valore;
     }
     
-    public abstract void usaAbilità();
+    public abstract String usaAbilità();
 }

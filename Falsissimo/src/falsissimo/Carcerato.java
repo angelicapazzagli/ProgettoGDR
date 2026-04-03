@@ -15,8 +15,8 @@ public class Carcerato extends FabrizioCorona{
     }
     
     @Override
-    public void usaAbilità() {
-        System.out.println("Hai evitato il pericolo. Astuzia +1");
+    public String usaAbilità() {
         this.astuzia++;
+        return "Hai evitato il pericolo. Astuzia +1";
     }
 }
