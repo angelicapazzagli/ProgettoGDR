@@ -66,7 +66,7 @@ public class EventiCasuali {
             return "Francesca Fagnani ti fa una domanda scomoda, riesci a cavartela grazie alla tua astuzia. (astuzia +1)";
         }
         fabrizio.fama -= 2;
-        fabrizio.getFama();
+        fabrizio.checkFama();
         return "Francesca Fagnani ti fa una domanda scomoda dalla quale non riesci a scappare. (fama -2)";
     }
     
@@ -104,10 +104,11 @@ public class EventiCasuali {
     public static String causaLegale(FabrizioCorona fabrizio) {
         if(fabrizio.getSoldi() > 10000) {
             fabrizio.soldi -= 10000;
+            fabrizio.checkSoldi();
             return "Hai abbastanza soldi per evitare la causa. (soldi -10.000)";
         }
         fabrizio.fama -= 1;
-        fabrizio.getFama();
+        fabrizio.checkFama();
         return "Immagine intaccata. (fama -1)";
     }
 

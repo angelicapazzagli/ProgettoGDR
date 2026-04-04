@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,19 +24,23 @@ import java.io.ObjectOutputStream;
 public class FileManager {
 
     public static String readClassifica(String txt) throws IOException {
-        String giocatori = "";
+        ArrayList<String> lines = new ArrayList();
         try (BufferedReader reader = new BufferedReader(new FileReader(txt))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                giocatori += line + "\n";
+                lines.add(line);
             }
         }
-        return giocatori;
+        lines.sort((l1, l2) -> Integer.compare(
+            Integer.parseInt(l2.replaceAll("\\D+", "")),
+            Integer.parseInt(l1.replaceAll("\\D+", ""))
+        ));
+        return String.join("\n", lines);
     }
 
-    public static void writeClassifica(String txt, FabrizioCorona fc, GameManager gm) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(txt))) {
-            writer.write(gm.getNickname() + " " + fc.nome);
+    public static void writeClassifica(String txt, FabrizioCorona fc, GameManager gm, int punti) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(txt, true))) {
+            writer.write(gm.getNickname() + " -" + fc.nome + " " + punti + "pt");
             writer.newLine();
         }
     }

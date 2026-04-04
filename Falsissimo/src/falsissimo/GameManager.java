@@ -20,6 +20,7 @@ public class GameManager {
     protected FabrizioCorona giocatore;
     private String nickname;
     private Random random;
+    private int punti;
 
     public GameManager(String txt) {
         this.fileClassifica = txt;
@@ -73,8 +74,8 @@ public class GameManager {
         return FileManager.readClassifica(fileClassifica);
     }
 
-    public void writeClassifica() throws IOException {
-        FileManager.writeClassifica(fileClassifica, giocatore, this);
+    public void writeClassifica(int punti) throws IOException {
+        FileManager.writeClassifica(fileClassifica, giocatore, this, punti);
     }
 
     public void salvaPartita() throws IOException {
@@ -103,5 +104,10 @@ public class GameManager {
     
     public void caricaPartita(File file) throws IOException, ClassNotFoundException {
         this.giocatore = FileManager.deserializzaPartita(file.getPath());
+    }
+    
+    public int getPunti() {
+        punti += (giocatore.getSoldi()/1000) + giocatore.getFama() + giocatore.getAstuzia();
+        return punti;
     }
 }

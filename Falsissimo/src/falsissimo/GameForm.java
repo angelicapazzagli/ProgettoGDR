@@ -5,6 +5,7 @@
 package falsissimo;
 
 import java.io.IOException;
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 /**
@@ -27,6 +28,13 @@ public class GameForm extends javax.swing.JFrame {
         insertImage();
         txtEventi.setLineWrap(true);
         txtEventi.setWrapStyleWord(true);
+        barPercorso.addChangeListener(e -> {
+            try {
+                checkProgress();
+            } catch (IOException ex) {
+                System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        });
     }
     
     public void insertImage() {
@@ -64,6 +72,42 @@ public class GameForm extends javax.swing.JFrame {
         txtEventi.append("\n" + messaggio);
         javax.swing.JOptionPane.showMessageDialog(this, "GAME OVER\n" + messaggio);
         this.dispose();
+    }
+    
+    private void checkProgress() throws IOException {
+        if (barPercorso.getValue() >= 100) {
+            gameManager.writeClassifica(gameManager.getPunti());
+            javax.swing.JOptionPane.showMessageDialog(this, "COMPLIMENTI HAI COMPLETATO IL GIOCO!\nClassifica aggiornata.");
+            this.dispose();
+        }
+    }
+    
+    private void aumentaBar(int incremento) throws IOException {
+        int nuovoValore = barPercorso.getValue() + incremento;
+        if (nuovoValore > barPercorso.getMaximum()) {
+            nuovoValore = barPercorso.getMaximum();
+        }
+        if (nuovoValore < 0) {
+            nuovoValore = 0;
+        }
+        barPercorso.setValue(nuovoValore);
+        checkProgress();
+    }
+    
+    private void controlloAumento(String messaggio) {
+        if(messaggio.contains("+")) {
+            try {
+                aumentaBar(new Random().nextInt(10, 26));
+            } catch (IOException ex) {
+                System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        } else if(messaggio.contains("-")) {
+            try {
+                aumentaBar(-(new Random().nextInt(1, 10)));
+            } catch (IOException ex) {
+                System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,6 +227,7 @@ public class GameForm extends javax.swing.JFrame {
 
         barPercorso.setFont(new java.awt.Font("Serif", 3, 18)); // NOI18N
         barPercorso.setForeground(new java.awt.Color(255, 0, 255));
+        barPercorso.setStringPainted(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -245,9 +290,9 @@ public class GameForm extends javax.swing.JFrame {
                 .addComponent(lblTitolo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(barPercorso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(barPercorso, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,12 +346,13 @@ public class GameForm extends javax.swing.JFrame {
 
     private void btnAbilitàActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbilitàActionPerformed
         String messaggio = gameManager.usaAbilità();
+        valueLabel();
         if(gameOver(messaggio)) {
             fineGioco(messaggio);
             return;
         }
+        controlloAumento(messaggio);
         txtEventi.append("\n" + messaggio);
-        valueLabel();
     }//GEN-LAST:event_btnAbilitàActionPerformed
 
     private void btnEsploraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsploraActionPerformed
@@ -320,21 +366,12 @@ public class GameForm extends javax.swing.JFrame {
             return;
         }
         switch (messaggio) {
-            case "Francesca Fagnani ti fa una domanda scomoda, riesci a cavartela grazie alla tua astuzia. (astuzia +1)":
-            case "Francesca Fagnani ti fa una domanda scomoda dalla quale non riesci a scappare. (fama -2)":
-                lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/FrancescaFagnani.png")));
-                break;
-            case "Sei riuscito ad incontrare Belen e ti ci hanno paparazzato. (soldi +15.000) (fama +1)":
-            case "Hai incontrato Belen ma hai fatto una brutta figura. (fama -1)":
-                lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/BelenRodriguez.png")));
-                break;
-            case "Litigata in diretta con Ilary, riesci a sfruttare il momento. (fama +2)":
-                lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/IlaryBlasi.png")));
-                break;
-            default:
-                lblOspite.setIcon(null);
-                break;
+            case "Francesca Fagnani ti fa una domanda scomoda, riesci a cavartela grazie alla tua astuzia. (astuzia +1)", "Francesca Fagnani ti fa una domanda scomoda dalla quale non riesci a scappare. (fama -2)" -> lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/FrancescaFagnani.png")));
+            case "Sei riuscito ad incontrare Belen e ti ci hanno paparazzato. (soldi +15.000) (fama +1)", "Hai incontrato Belen ma hai fatto una brutta figura. (fama -1)" -> lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/BelenRodriguez.png")));
+            case "Litigata in diretta con Ilary, riesci a sfruttare il momento. (fama +2)" -> lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/IlaryBlasi.png")));
+            default -> lblOspite.setIcon(null);
         }
+        controlloAumento(messaggio);
         txtEventi.append("\n" + messaggio);
     }//GEN-LAST:event_btnEsploraActionPerformed
 
