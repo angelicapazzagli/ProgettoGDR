@@ -23,10 +23,10 @@ public class GameForm extends javax.swing.JFrame {
         initComponents();
         this.gameManager = gm;
         lblNickname.setText(gm.getNickname() + " " + gm.giocatore.nome);
-        lblSoldi.setText("" + gm.giocatore.soldi);
-        lblFama.setText(gm.giocatore.fama + "/10");
-        lblAstuzia.setText(gm.giocatore.astuzia + "/10");
+        valueLabel();
         insertImage();
+        txtEventi.setLineWrap(true);
+        txtEventi.setWrapStyleWord(true);
     }
     
     public void insertImage() {
@@ -42,6 +42,28 @@ public class GameForm extends javax.swing.JFrame {
                 lblPersonaggio.setIcon(new ImageIcon(getClass().getResource("/images/GameModello.png")));
                 break;
         }
+    }
+    
+    public void valueLabel() {
+        lblSoldi.setText("" + gameManager.giocatore.getSoldi());
+        lblFama.setText(gameManager.giocatore.getFama() + "/10");
+        lblAstuzia.setText(gameManager.giocatore.getAstuzia() + "/10");
+    }
+    
+    private boolean gameOver(String messaggio) {
+        if(gameManager.giocatore.getSoldi() <= 0) {
+            return true;
+        }
+        if(messaggio.contains("GAME OVER")) {
+            return true;
+        }
+        return false;
+    }
+    
+    private void fineGioco(String messaggio) {
+        txtEventi.append("\n" + messaggio);
+        javax.swing.JOptionPane.showMessageDialog(this, "GAME OVER\n" + messaggio);
+        this.dispose();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -279,19 +301,39 @@ public class GameForm extends javax.swing.JFrame {
 
     private void btnAbilitàActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbilitàActionPerformed
         String messaggio = gameManager.usaAbilità();
+        if(gameOver(messaggio)) {
+            fineGioco(messaggio);
+            return;
+        }
         txtEventi.append("\n" + messaggio);
+        valueLabel();
     }//GEN-LAST:event_btnAbilitàActionPerformed
 
     private void btnEsploraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsploraActionPerformed
         String messaggio = gameManager.esplora();
-        if(messaggio.equals("Francesca Fagnani ti sta intervistando.")) {
-            lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/FrancescaFagnani.png")));
+        valueLabel();
+        if(gameManager.giocatore.getSoldi() == 0) {
+            messaggio = "Soldi terminati";
         }
-        else if(messaggio.equals("Incontri Belen Rodriguez.")) {
-            lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/BelenRodriguez.png")));
+        if(gameOver(messaggio)) {
+            fineGioco(messaggio);
+            return;
         }
-        else {
-            lblOspite.setIcon(null);
+        switch (messaggio) {
+            case "Francesca Fagnani ti fa una domanda scomoda, riesci a cavartela grazie alla tua astuzia. (astuzia +1)":
+            case "Francesca Fagnani ti fa una domanda scomoda dalla quale non riesci a scappare. (fama -2)":
+                lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/FrancescaFagnani.png")));
+                break;
+            case "Sei riuscito ad incontrare Belen e ti ci hanno paparazzato. (soldi +15.000) (fama +1)":
+            case "Hai incontrato Belen ma hai fatto una brutta figura. (fama -1)":
+                lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/BelenRodriguez.png")));
+                break;
+            case "Litigata in diretta con Ilary, riesci a sfruttare il momento. (fama +2)":
+                lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/IlaryBlasi.png")));
+                break;
+            default:
+                lblOspite.setIcon(null);
+                break;
         }
         txtEventi.append("\n" + messaggio);
     }//GEN-LAST:event_btnEsploraActionPerformed

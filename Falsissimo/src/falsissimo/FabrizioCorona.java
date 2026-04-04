@@ -38,14 +38,28 @@ public abstract class FabrizioCorona implements Serializable{
         return astuzia;
     }
     
-    public int checkValore(int valore) {
-        if(valore > 10) {
-            valore = 10;
+    public void checkSoldi() {
+        if(soldi < 0) {
+            soldi = 0;
         }
-        else if(valore < 0) {
-            valore = 0;
+    }
+    
+    public void checkFama() {
+        if(fama > 10) {
+            fama = 10;
         }
-        return valore;
+        else if(fama < 0) {
+            fama = 0;
+        }
+    }
+    
+    public void checkAstuzia() {
+        if(astuzia > 10) {
+            astuzia = 10;
+        }
+        else if(astuzia < 0) {
+            astuzia = 0;
+        }
     }
     
     public abstract String usaAbilità();
