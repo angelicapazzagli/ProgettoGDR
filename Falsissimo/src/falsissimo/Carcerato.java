@@ -11,12 +11,12 @@ package falsissimo;
 public class Carcerato extends FabrizioCorona{
     
     public Carcerato() {
-        super("CARCERATO", 100000, 9, 5, Abilità.EVITA);
+        super("CARCERATO", 150000, 9, 5);
     }
     
     @Override
     public String usaAbilità() {
         this.astuzia++;
-        return "Hai evitato il pericolo. Astuzia +1";
+        return "Hai evitato tutti i pericoli. (astuzia +1)";
     }
 }

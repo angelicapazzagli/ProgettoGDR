@@ -12,12 +12,12 @@ package falsissimo;
 public class Modello extends FabrizioCorona{
     
     public Modello() {
-        super("MODELLO", 400000, 7, 6, Abilità.IMBUCATI);
+        super("MODELLO", 400000, 7, 6);
     }
     
     @Override
     public String usaAbilità() {
         this.fama++;
-        return "Sei riuscito ad imbucarti e ottenere nuovi contratti. Fama +1";
+        return "Sei riuscito ad imbucarti in vari privè e ottenere nuovi contratti. (fama +2)";
     }
 }

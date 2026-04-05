@@ -84,22 +84,11 @@ public class GameManager {
     }
 
     public boolean presenzaSalvataggi() {
-        File cartella = new File("Salvataggi/" + nickname);
-        return cartella.exists() && cartella.isDirectory();
+        return FileManager.presenzaSalvataggi(nickname);
     }
 
     public ArrayList<File> getSalvataggi() {
-        File cartella = new File("Salvataggi/" + nickname);
-        ArrayList<File> files = new ArrayList();
-        if (cartella.exists() && cartella.isDirectory()) {
-            for (File f : cartella.listFiles()) {
-                if (f.isFile()) {
-                    files.add(f);
-                }
-            }
-            files.sort(Comparator.comparingLong(File::lastModified));
-        }
-        return files;
+        return FileManager.getSalvataggi(nickname);
     }
     
     public void caricaPartita(File file) throws IOException, ClassNotFoundException {

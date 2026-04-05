@@ -13,7 +13,7 @@ import java.util.Random;
 public class EventiCasuali {
     public static String perquisizione(FabrizioCorona fabrizio) {
         Random random = new Random();
-        fabrizio.soldi -= random.nextInt(fabrizio.getSoldi());
+        fabrizio.soldi -= random.nextInt(fabrizio.getSoldi() / 2);
         fabrizio.checkSoldi();
         return "Perquisizione andata male. (soldi -*)";
     }

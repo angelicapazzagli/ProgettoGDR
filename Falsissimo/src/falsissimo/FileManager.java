@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  *
@@ -76,5 +77,24 @@ public class FileManager {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             return (FabrizioCorona) ois.readObject();
         }
+    }
+    
+    public static boolean presenzaSalvataggi(String nickname) {
+        File cartella = new File("Salvataggi/" + nickname);
+        return cartella.exists() && cartella.isDirectory();
+    }
+    
+    public static ArrayList<File> getSalvataggi(String nickname) {
+        File cartella = new File("Salvataggi/" + nickname);
+        ArrayList<File> files = new ArrayList();
+        if (cartella.exists() && cartella.isDirectory()) {
+            for (File f : cartella.listFiles()) {
+                if (f.isFile()) {
+                    files.add(f);
+                }
+            }
+            files.sort(Comparator.comparingLong(File::lastModified));
+        }
+        return files;
     }
 }

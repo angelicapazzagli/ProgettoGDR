@@ -16,14 +16,16 @@ public abstract class FabrizioCorona implements Serializable{
     protected int soldi;
     protected int fama;
     protected int astuzia;
-    protected Abilità abilità;
     
-    public FabrizioCorona(String nome, int soldi, int fama, int astuzia, Abilità abilità) {
+    public FabrizioCorona(String nome, int soldi, int fama, int astuzia) {
         this.nome = nome;
         this.soldi = soldi;
         this.fama = fama;
         this.astuzia = astuzia;
-        this.abilità = abilità;
+    }
+    
+    public String getNome() {
+        return nome;
     }
     
     public int getSoldi() {

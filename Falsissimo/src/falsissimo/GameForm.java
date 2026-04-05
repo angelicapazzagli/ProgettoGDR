@@ -16,6 +16,7 @@ public class GameForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GameForm.class.getName());
     private GameManager gameManager;
+    private boolean giocoFinito = false;
     /**
      * Creates new form GameForm
      * @param gm
@@ -28,13 +29,6 @@ public class GameForm extends javax.swing.JFrame {
         insertImage();
         txtEventi.setLineWrap(true);
         txtEventi.setWrapStyleWord(true);
-        barPercorso.addChangeListener(e -> {
-            try {
-                checkProgress();
-            } catch (IOException ex) {
-                System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            }
-        });
     }
     
     public void insertImage() {
@@ -75,7 +69,11 @@ public class GameForm extends javax.swing.JFrame {
     }
     
     private void checkProgress() throws IOException {
+        if(giocoFinito) {
+            return;
+        }
         if (barPercorso.getValue() >= 100) {
+            giocoFinito = true;
             gameManager.writeClassifica(gameManager.getPunti());
             javax.swing.JOptionPane.showMessageDialog(this, "COMPLIMENTI HAI COMPLETATO IL GIOCO!\nClassifica aggiornata.");
             this.dispose();
@@ -91,19 +89,20 @@ public class GameForm extends javax.swing.JFrame {
             nuovoValore = 0;
         }
         barPercorso.setValue(nuovoValore);
+        gameManager.setProgresso(nuovoValore);
         checkProgress();
     }
     
     private void controlloAumento(String messaggio) {
         if(messaggio.contains("+")) {
             try {
-                aumentaBar(new Random().nextInt(10, 26));
+                aumentaBar(new Random().nextInt(40, 50));
             } catch (IOException ex) {
                 System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         } else if(messaggio.contains("-")) {
             try {
-                aumentaBar(-(new Random().nextInt(1, 10)));
+                aumentaBar(-(new Random().nextInt(1, 6)));
             } catch (IOException ex) {
                 System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
