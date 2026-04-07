@@ -11,7 +11,7 @@ package falsissimo;
 public class Carcerato extends FabrizioCorona{
     
     public Carcerato() {
-        super("CARCERATO", 150000, 9, 5);
+        super("CARCERATO", 200000, 9, 5);
     }
     
     @Override

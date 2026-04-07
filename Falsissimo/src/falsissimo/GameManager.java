@@ -78,7 +78,7 @@ public class GameManager implements Serializable{
         return giocatore.usaAbilità();
     }
 
-    public String esplora() {
+    public Evento esplora() {
         return EventiCasuali.estraiEvento(giocatore);
     }
 

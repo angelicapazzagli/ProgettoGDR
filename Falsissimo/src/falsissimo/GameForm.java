@@ -97,7 +97,7 @@ public class GameForm extends javax.swing.JFrame {
     private void controlloAumento(String messaggio) {
         if(messaggio.contains("+")) {
             try {
-                aumentaBar(new Random().nextInt(40, 50));
+                aumentaBar(new Random().nextInt(15, 31));
             } catch (IOException ex) {
                 System.getLogger(GameForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -272,10 +272,10 @@ public class GameForm extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnAbilità, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnEsplora, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblOspite, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblOspite, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnlEventi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
@@ -307,8 +307,8 @@ public class GameForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblOspite, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlEventi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnlEventi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblOspite, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSalva, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,12 +362,15 @@ public class GameForm extends javax.swing.JFrame {
             fineGioco(messaggio);
             return;
         }
+        lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/Stella.png")));
         controlloAumento(messaggio);
         txtEventi.append("\n" + messaggio);
+        btnAbilità.setEnabled(false);
     }//GEN-LAST:event_btnAbilitàActionPerformed
 
     private void btnEsploraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsploraActionPerformed
-        String messaggio = gameManager.esplora();
+        Evento evento = gameManager.esplora();
+        String messaggio = evento.getMessaggio();
         valueLabel();
         if(gameManager.giocatore.getSoldi() == 0) {
             messaggio = "Soldi terminati";
@@ -376,12 +379,7 @@ public class GameForm extends javax.swing.JFrame {
             fineGioco(messaggio);
             return;
         }
-        switch (messaggio) {
-            case "Francesca Fagnani ti fa una domanda scomoda, riesci a cavartela grazie alla tua astuzia. (astuzia +1)", "Francesca Fagnani ti fa una domanda scomoda dalla quale non riesci a scappare. (fama -2)" -> lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/FrancescaFagnani.png")));
-            case "Sei riuscito ad incontrare Belen e ti ci hanno paparazzato. (soldi +15.000) (fama +1)", "Hai incontrato Belen ma hai fatto una brutta figura. (fama -1)" -> lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/BelenRodriguez.png")));
-            case "Litigata in diretta con Ilary, riesci a sfruttare il momento. (fama +2)" -> lblOspite.setIcon(new ImageIcon(getClass().getResource("/images/IlaryBlasi.png")));
-            default -> lblOspite.setIcon(null);
-        }
+        lblOspite.setIcon(new ImageIcon(getClass().getResource(evento.getImmagine())));
         controlloAumento(messaggio);
         txtEventi.append("\n" + messaggio);
     }//GEN-LAST:event_btnEsploraActionPerformed

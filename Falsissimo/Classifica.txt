@@ -1,2 +1,5 @@
 angelica -PAPARAZZO 304pt
 angi -CARCERATO 36pt
+a -MODELLO 420pt
+aangy -CARCERATO 77pt
+jkb -CARCERATO 219pt

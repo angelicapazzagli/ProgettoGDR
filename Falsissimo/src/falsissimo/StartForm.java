@@ -40,7 +40,6 @@ public class StartForm extends javax.swing.JFrame {
         lblTitolo = new javax.swing.JLabel();
         btnRegole = new javax.swing.JButton();
         btnClassifica = new javax.swing.JButton();
-        btnRecupera = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,10 +85,6 @@ public class StartForm extends javax.swing.JFrame {
             }
         });
 
-        btnRecupera.setBackground(new java.awt.Color(204, 204, 204));
-        btnRecupera.setFont(new java.awt.Font("Serif", 3, 14)); // NOI18N
-        btnRecupera.setText("RECUPERA PARTITA");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,8 +92,8 @@ public class StartForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(203, 203, 203)
                 .addComponent(btnClassifica)
-                .addGap(34, 34, 34)
-                .addComponent(btnRecupera)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegole, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(37, Short.MAX_VALUE)
@@ -113,30 +108,24 @@ public class StartForm extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(95, 95, 95)))
-                        .addGap(36, 36, 36)
-                        .addComponent(btnRegole)))
+                        .addGap(115, 115, 115)))
                 .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(btnRegole)))
+                .addGap(15, 15, 15)
+                .addComponent(lblTitolo, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClassifica, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRecupera, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnClassifica, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btnRegole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29))
         );
 
@@ -170,14 +159,22 @@ public class StartForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnRegoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegoleActionPerformed
-        String testo = "Benvenuto a Falsissimo!\n\n"
-                 + "Inserisci il tuo nickname e premi START per iniziare una nuova partita.\n"
-                 + "Oppure clicca 'Recupera partita' per riprendere la precedente.\n"
-                 + "Clicca su 'Classifica' per visualizzare l'elenco dei user che hanno giocato.\n"
-                 + "L'obiettivo è raggiungere il maggior patrimonio possibile in 10 turni, ma attenzione a non scendere sotto zero.\n\n"
-                 + "Ad una giornata da Fabrizio Corona!\n\n";
-    
-        JOptionPane.showMessageDialog(this, testo, "Regole del Gioco", JOptionPane.INFORMATION_MESSAGE);
+        String testoRegole = """
+        Benvenuto nel mondo dei VIP!
+
+        Il tuo obiettivo è completare il percorso al 100% per diventare una star internazionale.
+        Durante il gioco, parteciperai a eventi che influenzeranno i tuoi progressi: alcuni aumenteranno i tuoi soldi, 
+        la tua fama o la tua astuzia, altri potrebbero ridurli.
+
+        Attenzione! Se i tuoi soldi arrivano a 0, il gioco finisce immediatamente: hai perso!
+
+        Strategia e fortuna sono fondamentali: scegli con attenzione le azioni da intraprendere 
+        e sfrutta al meglio i tuoi valori di soldi, fama e astuzia per avanzare lungo il percorso 
+        e raggiungere il traguardo finale.
+
+        Buona fortuna, futuro VIP!
+        """;
+        JOptionPane.showMessageDialog(this, testoRegole, "Regole del Gioco", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnRegoleActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -198,7 +195,6 @@ public class StartForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClassifica;
-    private javax.swing.JButton btnRecupera;
     private javax.swing.JButton btnRegole;
     private javax.swing.JButton btnStart;
     private javax.swing.JPanel jPanel1;
