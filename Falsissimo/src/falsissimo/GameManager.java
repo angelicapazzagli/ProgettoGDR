@@ -115,4 +115,8 @@ public class GameManager implements Serializable{
         punti += (giocatore.getSoldi()/1000) + giocatore.getFama() + giocatore.getAstuzia();
         return punti;
     }
+    
+    public void usaSoldi() {
+        giocatore.usaSoldi();
+    }
 }

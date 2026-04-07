@@ -64,5 +64,11 @@ public abstract class FabrizioCorona implements Serializable{
         }
     }
     
+    public void usaSoldi() {
+        if(soldi > 150000) {
+            soldi -= 150000;
+        }
+    }
+    
     public abstract String usaAbilità();
 }
