@@ -6,25 +6,25 @@ package falsissimo;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Random;
 
 /**
  *
  * @author pazzagli.angelica
  */
-public class GameManager {
-
+public class GameManager implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String fileClassifica;
     protected FabrizioCorona giocatore;
     private String nickname;
-    private Random random;
     private int punti;
+    private int progresso;
 
     public GameManager(String txt) {
         this.fileClassifica = txt;
-        random = new Random();
+        this.punti = 0;
+        this.progresso = 0;
     }
 
     public void setNickname(String name) {
@@ -33,6 +33,18 @@ public class GameManager {
 
     public String getNickname() {
         return nickname;
+    }
+    
+    public FabrizioCorona getGiocatore() {
+        return giocatore;
+    }
+    
+    public int getProgresso() {
+        return progresso;
+    }
+
+    public void setProgresso(int progresso) {
+        this.progresso = progresso;
     }
 
     public void sceltaPersonaggio(int nScelta) {
@@ -80,7 +92,7 @@ public class GameManager {
 
     public void salvaPartita() throws IOException {
         File cartella = FileManager.newCartella(nickname);
-        FileManager.serializzaPartita(cartella, giocatore);
+        FileManager.serializzaPartita(cartella, this);
     }
 
     public boolean presenzaSalvataggi() {
@@ -92,7 +104,11 @@ public class GameManager {
     }
     
     public void caricaPartita(File file) throws IOException, ClassNotFoundException {
-        this.giocatore = FileManager.deserializzaPartita(file.getPath());
+        GameManager caricato = FileManager.deserializzaPartita(file.getPath());
+        this.giocatore = caricato.getGiocatore();
+        this.progresso = caricato.getProgresso();
+        this.nickname = caricato.getNickname();
+        this.punti = caricato.getPunti();
     }
     
     public int getPunti() {

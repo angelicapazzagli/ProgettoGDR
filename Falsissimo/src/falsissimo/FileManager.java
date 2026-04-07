@@ -15,8 +15,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 
 /**
  *
@@ -55,7 +57,7 @@ public class FileManager {
         return cartella;
     }
 
-    public static void serializzaPartita(File cartella, FabrizioCorona corona) throws FileNotFoundException, IOException {
+    public static void serializzaPartita(File cartella, GameManager gm) throws FileNotFoundException, IOException {
         File[] files = cartella.listFiles(File::isFile);
         if (files != null && files.length >= 3) {
             File oldest = files[0];
@@ -66,16 +68,18 @@ public class FileManager {
             }
             oldest.delete();
         }
-        String fileName = "save_" + corona.nome + ".ser";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String timestamp = sdf.format(new Date());
+        String fileName = "save_" + gm.getGiocatore().getNome() + "_" + timestamp + ".ser";
         File file = new File(cartella, fileName);
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            oos.writeObject(corona);
+            oos.writeObject(gm);
         }
     }
 
-    public static FabrizioCorona deserializzaPartita(String file) throws IOException, ClassNotFoundException {
+    public static GameManager deserializzaPartita(String file) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            return (FabrizioCorona) ois.readObject();
+            return (GameManager) ois.readObject();
         }
     }
     

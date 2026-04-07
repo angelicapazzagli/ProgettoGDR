@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author pazzagli.angelica
  */
 public abstract class FabrizioCorona implements Serializable{
-    private static final long serialversionUID = 1L;
+    private static final long serialVersionUID = 1L;
     protected String nome;
     protected int soldi;
     protected int fama;

@@ -29,6 +29,7 @@ public class GameForm extends javax.swing.JFrame {
         insertImage();
         txtEventi.setLineWrap(true);
         txtEventi.setWrapStyleWord(true);
+        barPercorso.setValue(gameManager.getProgresso());
     }
     
     public void insertImage() {
@@ -81,7 +82,7 @@ public class GameForm extends javax.swing.JFrame {
     }
     
     private void aumentaBar(int incremento) throws IOException {
-        int nuovoValore = barPercorso.getValue() + incremento;
+        int nuovoValore = gameManager.getProgresso() + incremento;
         if (nuovoValore > barPercorso.getMaximum()) {
             nuovoValore = barPercorso.getMaximum();
         }
@@ -136,6 +137,7 @@ public class GameForm extends javax.swing.JFrame {
         btnAbilità = new javax.swing.JButton();
         btnEsplora = new javax.swing.JButton();
         barPercorso = new javax.swing.JProgressBar();
+        lblCorona = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,6 +230,9 @@ public class GameForm extends javax.swing.JFrame {
         barPercorso.setForeground(new java.awt.Color(255, 0, 255));
         barPercorso.setStringPainted(true);
 
+        lblCorona.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCorona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FinaleCorona.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -279,8 +284,13 @@ public class GameForm extends javax.swing.JFrame {
                         .addGap(43, 43, 43))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(barPercorso, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(165, 165, 165))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(barPercorso, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(165, 165, 165))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCorona)
+                        .addGap(146, 146, 146))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +301,9 @@ public class GameForm extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(barPercorso, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblCorona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,6 +396,7 @@ public class GameForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAstuzia;
+    private javax.swing.JLabel lblCorona;
     private javax.swing.JLabel lblFama;
     private javax.swing.JLabel lblNickname;
     private javax.swing.JLabel lblOspite;
